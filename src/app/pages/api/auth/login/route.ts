@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import User from '../../../../models/userModel';
+import User from '@/models/userModel';
 import bcryptjs from 'bcryptjs';
 import { connectDB } from '@/lib/database/mongodbConfig';
 import jwt from 'jsonwebtoken';
