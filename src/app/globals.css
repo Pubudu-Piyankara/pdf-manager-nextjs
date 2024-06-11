@@ -1,22 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: Inter;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  
+  
   .max-container {
     @apply mx-auto max-w-[1440px];
   }
+
   .padding-container {
     @apply px-6 lg:px-20 2xl:px-0;
   }
+
   .flexCenter {
     @apply flex items-center justify-center;
   }
@@ -32,12 +40,11 @@ body {
   .flexEnd {
     @apply flex items-center justify-end;
   }
-  .flexItemStart {
+  .flexItemsStart {
     @apply flex items-start justify-center;
   }
-  .boldTopic{
-    @apply font-bold text-[24px] leading-[120%];
-  }
+
+  /* FONTS */
   .regular-64 {
     @apply text-[64px] font-[400] leading-[120%];
   }
@@ -61,12 +68,52 @@ body {
   .regular-18 {
     @apply text-[18px] font-[400];
   }
+
   .regular-16 {
     @apply text-[16px] font-[400];
   }
 
+  .regular-14 {
+    @apply text-[14px] font-[400];
+  }
+
+  .medium-14 {
+    @apply text-[14px] font-[600];
+  }
+
+  .bold-88 {
+    @apply text-[88px] font-[700] leading-[120%];
+  }
+
+  .bold-64 {
+    @apply text-[64px] font-[700] leading-[120%];
+  }
+
+  .bold-52 {
+    @apply text-[52px] font-[700] leading-[120%];
+  }
+
+  .bold-40 {
+    @apply text-[40px] font-[700] leading-[120%];
+  }
+
+  .bold-32 {
+    @apply text-[32px] font-[700] leading-[120%];
+  }
+
+  .bold-20 {
+    @apply text-[20px] font-[700];
+  }
+
+  .bold-18 {
+    @apply text-[18px] font-[700];
+  }
+
+  .bold-16 {
+    @apply text-[16px] font-[700];
+  }
   .btn_blue  { 
-    @apply border-0 bg-blue-500 hover:bg-blue-600 px-8 py-2 text-white font-semibold rounded-full transition duration-300 ease-in-out;
+    @apply border-0 bg-[#4743E0] hover:bg-blue-600 px-8 py-2 text-white font-semibold rounded-full transition duration-300 ease-in-out;
   }
   .btn_brown  { 
     @apply border-0 bg-[#964B00] hover:bg-[#562B00] hover:font-bold px-8 py-2 text-white font-medium rounded-full transition duration-300 ease-in-out;
@@ -78,66 +125,5 @@ body {
   .custom-shape{
     @apply w-[100%] h-[100%] absolute top-10 left-0;
   }
-  .circles-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    
-  }
-  
-  .circle {
-    position: absolute;
-    background-color: brown;
-    border-radius: 50%;
-    opacity: 0.7;
-  }
-
-  .hero-container {
-    position: relative;
-    background: linear-gradient(135deg, #f3ec78, #af4261);
-    color: #fff;
-    padding: 100px 0;
-  }
-
-  .circles-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/circles.svg') no-repeat center center/cover;
-    z-index: -1;
-  }
- 
-  .image-container {
-    margin-top: 32px;
-  }
-
-  .image {
-    border-radius: 50%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .content-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 500px;
-  }
-
-  .title {
-    font-size: 48px;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-
-  .description {
-    font-size: 18px;
-    margin-bottom: 30px;
-    line-height: 1.6;
-  }
-
-  .get-started-button {
-    @apply btn_blue;
-  }
 }
+
