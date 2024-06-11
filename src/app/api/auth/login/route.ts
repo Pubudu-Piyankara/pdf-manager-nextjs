@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import User from "../../../../models/userModel";
 import bcryptjs from "bcryptjs";
-import connectDB from "@/database/mongodbConfig";
+import {connectDB} from "@/database/mongodbConfig";
 import jwt from "jsonwebtoken";
 
 connectDB();

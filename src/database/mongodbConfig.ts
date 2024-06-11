@@ -1,20 +1,29 @@
-import mongoose from 'mongoose';
+import mongoose, { Mongoose } from 'mongoose';
 
 const db = process.env.MONGODB_URI;
 
-export default async function connectDB() {
-  try {
-    mongoose.connect(db!);
-    const connection = mongoose.connection;
+interface MongooseConnection{
+  connection: Mongoose | null;
+  promise: Promise<Mongoose> | null;
+}
 
-    connection.on("connected", () => {
-      console.log("Database Connected");
-    });
-    connection.on("error", (error: any) => {
-      console.log("Database Connection Failed", error);
-      process.exit();
-    });
-  } catch (error: any) {
-    console.log("Database Connection Failed", error);
+let cached: MongooseConnection = ( global as any).mongoose;
+
+if(!cached){
+  cached = (global as any).mongoose = { connection: null, promise: null };
+}
+
+export const connectDB = async () => {
+  if(cached.connection){
+      return cached.connection;
   }
+
+  if (!db) throw new Error("MONGODB_URL is not defined");
+      cached.promise = cached.promise || 
+      mongoose.connect(db, 
+           {dbName:'imagine', bufferCommands: false});
+     
+  
+  cached.connection = await cached.promise;
+  return cached.connection;
 }
