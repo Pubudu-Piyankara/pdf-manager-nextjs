@@ -20,6 +20,7 @@ const LogInPage = () => {
       toast.success("Login successful");
       router.push("/");
     } catch (error: any) {
+      toast.error("Error logging in");
       console.log("Login error", error.message);
     }
   };
