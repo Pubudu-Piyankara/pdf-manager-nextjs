@@ -11,7 +11,7 @@ const LogInPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const actionLogin = async (e: any) => {
+  const actionLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setLoading(true);
     try {

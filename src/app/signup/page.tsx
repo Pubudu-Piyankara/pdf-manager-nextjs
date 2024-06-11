@@ -5,10 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Sign } from "crypto";
 
 const SignUpPage = () => {
   const router = useRouter();
-  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [user, setUser] = useState({} as SignUpUser);
   const [loading, setLoading] = useState(false);
 
   const signUp = async (e: React.FormEvent) => {
