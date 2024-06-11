@@ -14,19 +14,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
+import { cookies } from 'next/headers'
+ 
+
+ 
 
 const Navbar = () => {
   const [userData, setUserData] = useState({} as SignUpUser);
   const [loading, setLoading] = useState(false);
 
+
   useEffect(() => {
     // Fetch user details from the server
     const fetchUser = async () => {
+
       try {
         const res = await fetch("/api/auth/user");
         const data = await res.json();
         setUserData(data.data);
         console.log("User data:", data);
+
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
