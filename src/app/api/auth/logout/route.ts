@@ -1,3 +1,5 @@
+"use server";
+import { handleError } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 export async function GET(){
@@ -13,6 +15,7 @@ export async function GET(){
         })
         return res;
     } catch (error:any) {
+        handleError(error);
         console.log("logout Failed", error.message);
     }
 }

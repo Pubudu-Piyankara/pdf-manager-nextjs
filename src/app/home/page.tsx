@@ -7,15 +7,16 @@ const HomePage = () => {
 
   return (
     <div>
-      <section className="flex-col py-4 md:flex-row flexBetween gap-10 bg-orange-50 md:gap-8 lg:py-8 z-0">
+      <section className="flex-col py-4 md:flex-row flexBetween gap-10 bg-gray-100 md:gap-8 lg:py-8 z-0">
       <div>
-        <Image
-          src="/hero.jpg"
-          alt="PDF"
+      <Image
+          src="/signup2.jpg"
+          alt="logo"
           width={1000}
           height={1000}
-          className="absolute rounded-r-full object-cover custom-shape opacity-70 lg:opacity-100 sm:w-full  lg:relative lg:h-screen"
+          className="w-auto h-screen rounded-r-full  object-cover custom-shape opacity-70 lg:opacity-100 lg:relative lg:h-screen lg:w-auto z-0"
         />
+        
       </div>
       <div className="absolute flexCenter text-black lg:relative lg:text-black pr-5">
         <div className="h-screen flex items-start justify-center flex-col w-full md:flexItemStart md:absolute lg:w-full lg:relative lg:flexCenter">

@@ -1,35 +1,29 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
- 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  const path = request.nextUrl.pathname;
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-  const isPublicPath = path === '/login' || path === '/signup' ;
-  const isLandingPath = path === '/';
+export function middleware(request:NextRequest){
+    const path=request.nextUrl.pathname
+    const isPublicPath=path==='/login' || path==='/signup' || path==='/verifyemail'
+   const token= request.cookies.get('token')?.value || ''
 
-  const token = request.cookies.get('token')?.value || '';
+   //path is public and having token then should not visit the signup and login
+//    if(isPublicPath && token){
+//     return NextResponse.redirect(new URL('/',request.nextUrl))
+//    }
 
-  if (isPublicPath  && token) {
-    
-    return NextResponse.redirect(new URL('/home', request.nextUrl));
-  }
-  if (isLandingPath && token) {
-    return NextResponse.redirect(new URL('/home', request.nextUrl));
-    
-  }
-  if (!isPublicPath && !token) {
-    return NextResponse.redirect(new URL('/', request.nextUrl));
-  }
+   if(!isPublicPath && !token){
+    return NextResponse.redirect(new URL('/login',request.nextUrl))
+   }
 }
- 
-// See "Matching Paths" below to learn more
-export const config = {
-  matcher: [
-    
-    '/home',
-    '/logout',
-    '/login',
-    '/signup',
-  ],
+
+export const config={
+    matcher:[
+        '/',
+        '/profile',
+        '/profile/:path*',
+        '/login',
+        '/signup',
+        '/verifyemail',
+        
+    ]
 }

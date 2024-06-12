@@ -1,51 +1,51 @@
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
-// const db = process.env.MONGODB_URI;
+const db = process.env.MONGODB_URI;
 
-// export default async function connectDB() {
-//   try {
-//     mongoose.connect(db!);
-//     const connection = mongoose.connection;
+export default async function connectDB() {
+  try {
+    mongoose.connect(db!);
+    const connection = mongoose.connection;
 
-//     connection.on("connected", () => {
-//       console.log("Database Connected");
-//     });
-//     connection.on("error", (error: any) => {
-//       console.log("Database Connection Failed", error);
-//       process.exit();
-//     });
-//   } catch (error: any) {
-//     console.log("Database Connection Failed", error);
-//   }
+    connection.on("connected", () => {
+      console.log("Database Connected");
+    });
+    connection.on("error", (error: any) => {
+      console.log("Database Connection Failed", error);
+      process.exit();
+    });
+  } catch (error: any) {
+    console.log("Database Connection Failed", error);
+  }
+}
+
+// import mongoose,{Mongoose} from "mongoose";
+
+// const db =process.env.MONGODB_URI;
+
+// interface MongooseConnection{
+//     connection: Mongoose | null;
+//     promise: Promise<Mongoose> | null;
 // }
 
-import mongoose,{Mongoose} from "mongoose";
+// let cached: MongooseConnection = ( global as any).mongoose;
 
-const db =process.env.MONGODB_URL;
+// if(!cached){
+//     cached = (global as any).mongoose = { connection: null, promise: null };
+// }
 
-interface MongooseConnection{
-    connection: Mongoose | null;
-    promise: Promise<Mongoose> | null;
-}
+// export const connectDB = async () => {
+//     if(cached.connection){
+//         return cached.connection;
+//     }
 
-let cached: MongooseConnection = ( global as any).mongoose;
-
-if(!cached){
-    cached = (global as any).mongoose = { connection: null, promise: null };
-}
-
-export const connectDB = async () => {
-    if(cached.connection){
-        return cached.connection;
-    }
-
-    if (!db) throw new Error("MONGODB_URL is not defined");
-        cached.promise = cached.promise || 
-        mongoose.connect(db, 
-             {dbName:'imagine', bufferCommands: false});
+//     if (!db) throw new Error("MONGODB_URL is not defined");
+//         cached.promise = cached.promise || 
+//         mongoose.connect(db, 
+//              {dbName:'users', bufferCommands: false});
        
     
-    cached.connection = await cached.promise;
-    return cached.connection;
-}
+//     cached.connection = await cached.promise;
+//     return cached.connection;
+// }
 

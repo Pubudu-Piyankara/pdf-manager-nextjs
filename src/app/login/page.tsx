@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import axios from 'axios';
@@ -7,26 +7,39 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
 const LogInPage = () => {
-    const [user, setUser] = useState({ email: '', password: '' });
-    const [loading, setLoading] = useState(false);
-    const router = useRouter();
-
-    const actionLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
-        setLoading(true);
-        try {
-            const res = await axios.post('/api/auth/login', user);
-            console.log('success', res.data);
-            toast.success('Login successful');
-            router.push('/home');
-        } catch (error: any) {
-            toast.error('Error logging in');
-            console.log('Login error', error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
+    const router = useRouter()
+    const [user, setUser] = React.useState(
+      {
+        email: "",
+        password: "",
+      }
+    );
+    const [buttonDisabled, setButtonDisabled] = useState(false)
+    const [loading, setLoading] = useState(false)
+  
+  useEffect(()=>{
+    if(user.email.length>0 && user.password.length>0){
+      setButtonDisabled(false)
+    }
+    else{
+      setButtonDisabled(true)
+    }
+  },[user])
+    
+    const onLogin = async () => {
+      try {
+        setLoading(true)
+       const response= await axios.post("api/auth/login",user);
+        console.log("Login success",response.data);
+        toast.success("Login  success");
+        router.push("/home");
+      } catch (error:any) {
+        toast.error(error.response.data.error)
+        console.log("Login failed",error.response.data.error)
+      }finally{
+        setLoading(false);
+      }
+    }
     return (
         <section className="flex flex-row">
             <div className="flex flex-col justify-center items-center bg-yellow-50 h-screen px-12 gap-16 lg:px-32 z-10 lg:flexCenter">
@@ -51,7 +64,7 @@ const LogInPage = () => {
                     </form>
                     <button
                         className="border border-gray-400 p-2 m-2 rounded-full btn_blue"
-                        onClick={actionLogin}
+                        onClick={onLogin}
                         disabled={loading}
                     >
                         {loading ? 'Loading...' : 'Login'}

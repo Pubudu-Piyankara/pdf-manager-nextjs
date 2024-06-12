@@ -24,22 +24,7 @@ const Navbar = () => {
   const [loading, setLoading] = useState(false);
 
 
-  useEffect(() => {
-    // Fetch user details from the server
-    const fetchUser = async () => {
 
-      try {
-        const res = await fetch("/api/auth/user");
-        const data = await res.json();
-        setUserData(data.data);
-        console.log("User data:", data);
-
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-    fetchUser();
-  }, []);
 
   return (
     <section className="fixed w-full h-20 bg-white visible padding-container shadow-sm rounded-md z-20">
