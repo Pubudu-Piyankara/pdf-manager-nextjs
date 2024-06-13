@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const handleError = (error: unknown) => {
+export const handleError = (error: any) => {
   if (error instanceof Error) {
     // This is a native JavaScript error (e.g., TypeError, RangeError)
     console.error(error.message);

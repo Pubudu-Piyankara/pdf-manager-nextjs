@@ -1,51 +1,36 @@
 import mongoose from 'mongoose';
 
-const db = process.env.MONGODB_URI;
+const db :any = process.env.MONGODB_URI;
 
-export default async function connectDB() {
-  try {
-    mongoose.connect(db!);
-    const connection = mongoose.connection;
-
-    connection.on("connected", () => {
-      console.log("Database Connected");
-    });
-    connection.on("error", (error: any) => {
-      console.log("Database Connection Failed", error);
-      process.exit();
-    });
-  } catch (error: any) {
-    console.log("Database Connection Failed", error);
-  }
+if (!db) {
+  throw new Error("Please connect to the database");
 }
 
-// import mongoose,{Mongoose} from "mongoose";
+let isConnected: boolean = false;
 
-// const db =process.env.MONGODB_URI;
+export default async function connectDB() {
+  if (isConnected) {
+    console.log("Database is already connected");
+    return;
+  }
 
-// interface MongooseConnection{
-//     connection: Mongoose | null;
-//     promise: Promise<Mongoose> | null;
-// }
+  try {
+    await mongoose.connect(db, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    } as mongoose.ConnectOptions);
+    isConnected = true;
 
-// let cached: MongooseConnection = ( global as any).mongoose;
+    mongoose.connection.on("connected", () => {
+      console.log("Database Connected");
+    });
 
-// if(!cached){
-//     cached = (global as any).mongoose = { connection: null, promise: null };
-// }
-
-// export const connectDB = async () => {
-//     if(cached.connection){
-//         return cached.connection;
-//     }
-
-//     if (!db) throw new Error("MONGODB_URL is not defined");
-//         cached.promise = cached.promise || 
-//         mongoose.connect(db, 
-//              {dbName:'users', bufferCommands: false});
-       
-    
-//     cached.connection = await cached.promise;
-//     return cached.connection;
-// }
-
+    mongoose.connection.on("error", (error: any) => {
+      console.error("Database Connection Failed", error);
+      process.exit(1);
+    });
+  } catch (error: any) {
+    console.error("Database Connection Failed", error);
+    process.exit(1);
+  }
+}

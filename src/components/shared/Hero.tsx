@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { Link } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -23,7 +24,10 @@ const Hero = () => {
             environment.
           </p>
           <button className="flexCenter btn_brown text-white px-6 py-3 rounded-lg transition">
+            <Link href="/login" >
             Get Started
+            </Link>
+           
           </button>
         </div>
       </div>

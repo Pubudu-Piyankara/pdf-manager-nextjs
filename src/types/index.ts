@@ -8,3 +8,8 @@ declare type SignUpUser = {
     email: string;
     password: string;
 };
+
+declare type fileType = {
+    name: string;
+    file: string;
+};
