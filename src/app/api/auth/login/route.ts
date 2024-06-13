@@ -1,6 +1,6 @@
 import bcryptjs from "bcryptjs";
 import connectDB from "@/lib/database/mongodbConfig";
-import User from "@/models/userModel";
+import User from "@/lib/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { handleError } from "@/lib/utils";
@@ -49,7 +49,7 @@ console.log("user exists")
     };
     //create token
     const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
-      expiresIn: "1d",
+      expiresIn: "1h",
     });
 
     const response = NextResponse.json({
