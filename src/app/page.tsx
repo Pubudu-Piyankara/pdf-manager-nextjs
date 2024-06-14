@@ -1,5 +1,5 @@
 import Hero from "@/components/shared/Hero";
-import Services from "@/components/shared/Services";
+import Services from "@/components/shared/Service";
 import { ToastProvider } from "@/components/ui/toast";
 import Image from "next/image";
 import { ToastContainer } from "react-toastify";

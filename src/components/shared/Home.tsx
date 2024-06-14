@@ -5,54 +5,7 @@ import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 
 const Home = () => {
-  const [fileName, setFileName] = useState<string | null>(null);
-  const { toast } = useToast();
-  const [file, setFile] = useState<File>();
-  const [progress, setProgress] = useState(0);
-  const [urls, setUrls] = useState<{
-    url: string;
-    thumbnailUrl: string | null;
-  }>();
-
-
-  const onUpload = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    if (!file) {
-      toast({
-        title: "No file selected",
-        description: "Please select a file to upload.",
-        variant: "destructive",
-      });
-      return;
-    }
-    if (!fileName) {
-      toast({
-        title: "No file name",
-        description: "Please enter a file name.",
-        variant: "destructive",
-      });
-      return;
-    }
-    try {
-      const res = await axios.post("/api/file/post", { name: fileName, file:file });
-      const { url, thumbnailUrl } = res.data;
-
-      setUrls({ url, thumbnailUrl });
-      toast({
-        title: "Success",
-        description: "File uploaded successfully.",
-        variant: "default",
-      });
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: handleError(error),
-        variant: "destructive",
-      });
-    }
-  };
+ 
 
   return (
     <section className="flex-col py-4 md:flex-row flexBetween gap-10 bg-gray-100 md:gap-8 lg:py-8 z-0">
@@ -74,33 +27,10 @@ const Home = () => {
             Upload, organize, and view your files in a user-friendly and secure
             environment.
           </p>
-          <form className="flexCenter flex-col">
-            <input
-              type="file"
-              accept="application/pdf"
-              placeholder="Upload here"
-              onChange={(e) => {
-                setFile(e.target.files?.[0]);
-              }}
-            />
-            {file ? (
-              <input
-                id="filename"
-                type="text"
-                placeholder="Enter file name"
-                onChange={(e) => {
-                  setFileName(e.target.value || null);
-                }}
-                className="px-2 py-1 border rounded-full"
-              />
-            ) : null}
-          </form>
-          <button
-            className=" btn_blue text-white  rounded-lg transition"
-            onClick={onUpload}
-          >
-            Upload PDF
-          </button>
+          <form action="/api/file/upload" method="post" encType="multipart/form-data">
+  <input type="file" name="file" />
+  <button type="submit">Upload File</button>
+</form>
         </div>
       </div>
     </section>
