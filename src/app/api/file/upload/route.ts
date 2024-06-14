@@ -16,7 +16,7 @@ export async function POST(req : NextRequest){
     const bytes = await fileBlob.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const path = `./files/${file.name}`;
+    const path = `./files/${file.text}`;
 
     await writeFile(path, buffer);
     console.log(`open ${path} to see the uploaded file`);
