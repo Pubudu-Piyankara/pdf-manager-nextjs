@@ -2,7 +2,6 @@ import bcryptjs from "bcryptjs";
 import  connectDB  from "@/lib/database/mongodbConfig";
 import User from "@/lib/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
-import { sendEmail } from "@/services/mailer";
 import { handleError } from "@/lib/utils";
 import { toast } from "react-toastify";
 
