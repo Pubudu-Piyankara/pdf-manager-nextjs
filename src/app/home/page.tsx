@@ -53,6 +53,7 @@ const UploadPage = () => {
           <input
             type="file"
             name="file"
+            accept="application/pdf"
             onChange={(e) => setFile(e.target.files?.[0])}
             ref={ref}
           />
