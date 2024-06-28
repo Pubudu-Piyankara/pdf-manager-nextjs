@@ -5,8 +5,6 @@ import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 
 const Home = () => {
- 
-
   return (
     <section className="flex-col py-4 md:flex-row flexBetween gap-10 bg-gray-100 md:gap-8 lg:py-8 z-0">
       <div>
@@ -27,10 +25,14 @@ const Home = () => {
             Upload, organize, and view your files in a user-friendly and secure
             environment.
           </p>
-          <form action="/api/file/upload" method="post" encType="multipart/form-data">
-  <input type="file" name="file" />
-  <button type="submit">Upload File</button>
-</form>
+          <form
+            action="/api/file/upload"
+            method="post"
+            encType="multipart/form-data"
+          >
+            <input type="file" name="file" />
+            <button type="submit">Upload File</button>
+          </form>
         </div>
       </div>
     </section>

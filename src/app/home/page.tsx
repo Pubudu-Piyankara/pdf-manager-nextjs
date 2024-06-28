@@ -1,10 +1,12 @@
 "use client";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import { IPdf } from "@/lib/models/fileModel";
 
 const UploadPage = () => {
   const [file, setFile] = useState<File>();
   const ref = useRef<HTMLInputElement>(null);
+  const [filename, setFilename] = useState<string>("" as IPdf["filename"]);
 
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -14,10 +16,13 @@ const UploadPage = () => {
     }
     try {
       const data = new FormData();
+      const pdf = { filename };
       data.set("file", file);
+      // pdf.filename && data.set("filename", pdf.filename);
       const res = await fetch("/api/file/upload", {
         method: "POST",
-        body: data,
+        body: data ,
+      
       });
       if (res.ok) {
         alert("File uploaded");
@@ -29,7 +34,7 @@ const UploadPage = () => {
     }
   };
   return (
-    <div className="flexCenter h-screen flex-col">
+    <div className="flex-col py-4 md:flex-row flexBetween gap-10 bg-gray-100 md:gap-8 lg:py-8 z-0">
       <div>
         <Image
           src="/signup2.jpg"
@@ -57,6 +62,14 @@ const UploadPage = () => {
             onChange={(e) => setFile(e.target.files?.[0])}
             ref={ref}
           />
+          {File ? (
+            <input
+              type="text"
+              name="filename"
+              placeholder="Enter filename"
+              onChange={(e) => setFilename(e.target.value)}
+            />
+          ):(null)}
           <button className="btn_blue" type="submit">Upload</button>
         </form>
         </div>
